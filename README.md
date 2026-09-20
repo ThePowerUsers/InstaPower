@@ -1,89 +1,144 @@
 # InstaPower
 
-> A focused Instagram desktop experience for Windows.
+<p align="center">
+  <strong>A clean, focused Instagram desktop experience for Windows.</strong><br>
+  Instagram in its own app window — without the browser clutter.
+</p>
 
-InstaPower brings Instagram into a dedicated Windows application powered by Electron. It removes the browser chrome while keeping the familiar Instagram web experience and a separate persistent app session.
+<p align="center">
+  <a href="https://github.com/ThePowerUsers/InstaPower/releases">Download</a> ·
+  <a href="https://github.com/ThePowerUsers/InstaPower/issues">Report a bug</a> ·
+  <a href="https://github.com/ThePowerUsers/InstaPower/discussions">Discussions</a>
+</p>
 
-## ✨ Highlights
+---
 
-- **Dedicated Instagram window** — focused desktop experience without a browser address bar.
-- **Persistent login session** — sign in normally and your Instagram session is kept between launches.
-- **Isolated app session** — InstaPower uses its own Chromium session rather than your Microsoft Edge profile.
-- **Windows-first** — packaged and distributed as a Windows desktop application.
-- **Full setup wizard** — choose the installation location and shortcut options through a normal Windows installer.
-- **Portable edition** — a standalone executable that requires no installation.
-- **Security-conscious Electron setup** — context isolation, sandboxing, disabled Node integration, and Electron fuses.
-- **Lightweight foundation** — designed to stay focused instead of becoming a full browser.
+## ✨ Why InstaPower?
 
-## 🚀 Download
+InstaPower gives Instagram its own dedicated Windows desktop window while keeping the familiar Instagram web experience.
 
-Windows builds are published from the project's GitHub Releases page.
+### What you get
 
-Download the latest Windows installer, run it, and use the setup wizard to choose where InstaPower should be installed. The installer can create Start Menu and Desktop shortcuts.
+| Feature | Details |
+| --- | --- |
+| 🖥️ **Dedicated desktop app** | Instagram in a focused Electron window, without a browser address bar. |
+| 🔐 **Persistent session** | Log in normally and stay signed in between launches. |
+| 🧩 **Separate app profile** | InstaPower keeps its own Chromium session instead of using your Edge profile. |
+| ⚡ **Focused experience** | Built around Instagram rather than trying to become another full browser. |
+| 📦 **Windows installer** | A normal setup wizard with a selectable installation directory. |
+| 🚀 **Portable edition** | A standalone `.exe` that can run without installation. |
+| 🛡️ **Security-minded Electron setup** | Context isolation, sandboxing, disabled Node integration, and Electron security fuses. |
 
-Prefer no installation? Download the **portable Windows executable** and run it directly from a folder, USB drive, or other location.
+## 📥 Download InstaPower
+
+**Windows 10/11**
+
+### Installer
+Download the **InstaPower Setup** executable from [GitHub Releases](https://github.com/ThePowerUsers/InstaPower/releases).
+
+The installer provides a normal Windows setup experience and lets you choose where InstaPower is installed. It can create Start Menu and Desktop shortcuts.
+
+### Portable
+Prefer not to install anything?
+
+Download the **portable InstaPower executable** from [GitHub Releases](https://github.com/ThePowerUsers/InstaPower/releases) and run it directly from a folder, USB drive, or other location.
+
+> **Tip:** Use the installer for a normal Windows installation. Use portable when you want a self-contained copy.
+
+## 🚀 Getting started
+
+1. Download the latest Windows build.
+2. Install InstaPower, or launch the portable executable.
+3. Sign in through Instagram's normal login page.
+4. Use Instagram from its dedicated desktop window.
+
+No separate InstaPower password or credential database is required.
 
 ## 🛠️ Development
 
-InstaPower is built with:
+Built with:
 
-- Electron
-- Electron Forge
-- Webpack
-- JavaScript
-- GitHub Actions
+- **Electron**
+- **Electron Forge**
+- **Webpack**
+- **JavaScript**
+- **GitHub Actions**
+- **electron-builder** for Windows distribution
+
+### Requirements
+
+- Node.js 22+
+- npm
+- Windows 10/11 for normal desktop testing
 
 ### Run locally
 
-Install dependencies:
-
 ```bash
 npm ci
-```
-
-Start the development build:
-
-```bash
 npm start
 ```
 
-> GitHub Codespaces can build the project, but the Electron GUI is intended to be tested on Windows.
+> GitHub Codespaces can prepare/build the project, but the Electron GUI is intended to be tested on Windows.
 
-### Build Windows installer
+### Build Windows packages
 
 ```bash
-npm run make
-
-# Windows installer + portable executable
+npm run package
 npm run build:windows
 ```
 
-The generated packages are placed under `out/make`.
+The Windows installer and portable executable are written to `dist/`.
 
 ## 🔐 Privacy & security
 
-InstaPower does **not** maintain a password database. Authentication is performed through Instagram's normal web login flow.
+InstaPower is intentionally simple about authentication:
 
-InstaPower does not use private or reverse-engineered Instagram APIs and does not intentionally automate account actions.
+- Instagram handles the login flow.
+- InstaPower does **not** maintain a custom password database.
+- The app does not intentionally collect or upload Instagram credentials.
+- The app uses a dedicated persistent Electron browser session.
+- InstaPower does not use private, reverse-engineered, or unauthorized Instagram APIs.
+- The project does not intentionally automate Instagram account actions.
 
-The application uses a dedicated persistent Electron session for Instagram.
+The application also keeps remote Instagram content isolated from Node.js capabilities using Electron security controls.
+
+## 🐛 Bugs & feature requests
+
+Found something broken? Please [open a bug report](https://github.com/ThePowerUsers/InstaPower/issues/new?template=bug_report.md).
+
+Have an idea? [Request a feature](https://github.com/ThePowerUsers/InstaPower/issues/new?template=feature_request.md).
+
+Please do not post passwords, cookies, session tokens, or other private information in issues.
+
+## 🤝 Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for development and pull-request guidelines.
+
+## 📋 Roadmap
+
+Planned desktop improvements include:
+
+- Better downloads handling
+- Desktop notifications
+- More Windows integration
+- Tray support
+- Application settings
+- Update support
+- Additional performance and stability improvements
+- More automated testing
+
+The roadmap may change as the project evolves.
 
 ## ⚠️ Unofficial project
 
-InstaPower is an independent, unofficial desktop client. It is not affiliated with, endorsed by, or sponsored by Instagram or Meta.
+InstaPower is an independent, unofficial desktop client. It is **not affiliated with, endorsed by, or sponsored by Instagram or Meta**.
 
 Instagram is a trademark of Meta Platforms, Inc.
 
-## 📋 Project status
-
-InstaPower is under active development. The current focus is a stable Windows desktop experience, followed by desktop polish such as downloads, notifications, shortcuts, tray integration, settings, and update support.
-
 ## 📄 License
 
-MIT — see [LICENSE](LICENSE).
+InstaPower is released under the [MIT License](LICENSE).
 
-## 👤 Author
+## 👤 ThePowerUsers
 
-**ThePowerUsers**
-
-Built as an open-source desktop project.
+Built and maintained by **ThePowerUsers** as an open-source Windows desktop project.
