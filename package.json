@@ -3,7 +3,7 @@
   "productName": "InstaPower",
   "version": "1.0.0",
   "description": "A fast, focused Instagram desktop experience for Windows, built with Electron.",
-  "main": ".webpack/main",
+  "main": ".webpack/main/index.js",
   "private": true,
   "scripts": {
     "start": "electron-forge start",
