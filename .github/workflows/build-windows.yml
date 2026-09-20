@@ -13,30 +13,77 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Prepare production bundle
         run: npm run package
+
+      - name: Locate Forge Windows package
+        id: forge-package
+        shell: pwsh
+        run: |
+          $package = Get-ChildItem -Path out -Directory |
+            Where-Object { $_.Name -match 'win32-x64$' } |
+            Select-Object -First 1
+
+          if (-not $package) {
+            Write-Error "Electron Forge did not produce a Windows x64 package under out/."
+            Get-ChildItem -Path out -Force -ErrorAction SilentlyContinue | Format-Table -AutoSize
+            exit 1
+          }
+
+          "path=$($package.FullName)" >> $env:GITHUB_OUTPUT
+          Write-Host "Using Forge package: $($package.FullName)"
+
       - name: Build installer and portable executable
-        run: npm run build:windows
+        shell: pwsh
+        run: |
+          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ steps.forge-package.outputs.path }}"
+
+      - name: Verify Windows artifacts
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem -Path dist -Filter '*Setup*.exe' -File
+          $portable = Get-ChildItem -Path dist -Filter '*portable*.exe' -File
+
+          if (-not $installer) {
+            Write-Error "NSIS installer was not produced."
+            exit 1
+          }
+
+          if (-not $portable) {
+            Write-Error "Portable executable was not produced."
+            exit 1
+          }
+
+          Write-Host "Installer:"
+          $installer | Select-Object Name, Length | Format-Table -AutoSize
+          Write-Host "Portable:"
+          $portable | Select-Object Name, Length | Format-Table -AutoSize
+
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
           name: InstaPower-Windows-Installer
           path: dist/*Setup*.exe
           if-no-files-found: error
+
       - name: Upload portable artifact
         uses: actions/upload-artifact@v4
         with:
           name: InstaPower-Windows-Portable
           path: dist/*portable*.exe
           if-no-files-found: error
+
       - name: Publish v1.0.0 release
         if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release InstaPower v1.0.0')
         shell: pwsh
