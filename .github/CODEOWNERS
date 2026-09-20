@@ -1,2 +1,10 @@
-# Default owners for the InstaPower repository
+# Repository ownership and review responsibility
+/.github/ @ThePowerUsers
+/src/ @ThePowerUsers
+/forge.config.js @ThePowerUsers
+/electron-builder.yml @ThePowerUsers
+/webpack.*.config.js @ThePowerUsers
+/package.json @ThePowerUsers
+/package-lock.json @ThePowerUsers
+/SECURITY.md @ThePowerUsers
 * @ThePowerUsers
