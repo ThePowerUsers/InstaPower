@@ -18,3 +18,4 @@ Initial Windows release.
 
 - Windows installer and portable builds use maximum compression.
 - Production packaging excludes unnecessary package metadata.
+- Release assets include SHA-256 checksums for Windows executables.
