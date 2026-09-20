@@ -10,6 +10,8 @@ Veyra brings Instagram into a dedicated Windows application powered by Electron.
 - **Persistent login session** — sign in normally and your Instagram session is kept between launches.
 - **Isolated app session** — Veyra uses its own Chromium session rather than your Microsoft Edge profile.
 - **Windows-first** — packaged and distributed as a Windows desktop application.
+- **Full setup wizard** — choose the installation location and shortcut options through a normal Windows installer.
+- **Portable edition** — a standalone executable that requires no installation.
 - **Security-conscious Electron setup** — context isolation, sandboxing, disabled Node integration, and Electron fuses.
 - **Lightweight foundation** — designed to stay focused instead of becoming a full browser.
 
@@ -17,7 +19,9 @@ Veyra brings Instagram into a dedicated Windows application powered by Electron.
 
 Windows builds are published from the project's GitHub Releases page.
 
-Download the latest Windows installer, run it, and launch **Veyra** from the Start Menu.
+Download the latest Windows installer, run it, and use the setup wizard to choose where Veyra should be installed. The installer can create Start Menu and Desktop shortcuts.
+
+Prefer no installation? Download the **portable Windows executable** and run it directly from a folder, USB drive, or other location.
 
 ## 🛠️ Development
 
@@ -49,6 +53,9 @@ npm start
 
 ```bash
 npm run make
+
+# Windows installer + portable executable
+npm run build:windows
 ```
 
 The generated packages are placed under `out/make`.
