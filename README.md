@@ -59,6 +59,8 @@ If InstaPower is useful to you, consider giving the repository a **Star** on Git
 
 **[⭐ Star InstaPower on GitHub](https://github.com/ThePowerUsers/InstaPower)**
 
+If you use InstaPower and find it useful, a genuine star helps other developers discover the project.
+
 ---
 
 ## Download
@@ -103,8 +105,6 @@ Security is treated as a first-class part of the project.
 - No intentional automation of Instagram account actions.
 
 For vulnerability reporting, see **[SECURITY.md](SECURITY.md)**.
-
-**Security contact:** parstylus@gmail.com
 
 ## Development
 
