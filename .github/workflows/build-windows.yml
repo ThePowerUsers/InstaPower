@@ -53,7 +53,7 @@ jobs:
       - name: Build installer and portable executable
         shell: pwsh
         run: |
-          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ steps.forge-package.outputs.path }}" --publish never
+          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ github.ref }}" --publish never
 
       - name: Verify Windows artifacts
         shell: pwsh
@@ -76,6 +76,28 @@ jobs:
           Write-Host "Portable:"
           $portable | Select-Object Name, Length | Format-Table -AutoSize
 
+      - name: Generate SHA256 checksums
+        shell: pwsh
+        run: |
+          $artifacts = Get-ChildItem -Path dist -Filter '*.exe' -File |
+            Where-Object { $_.Name -match 'Setup|portable' } |
+            Sort-Object Name
+
+          if (-not $artifacts) {
+            Write-Error "No Windows executables were found for checksum generation."
+            exit 1
+          }
+
+          $lines = foreach ($artifact in $artifacts) {
+            $hash = (Get-FileHash -Path $artifact.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $($artifact.Name)"
+          }
+
+          $lines | Set-Content -Path dist/SHA256SUMS.txt -Encoding ascii
+
+          Write-Host "SHA256SUMS.txt:"
+          Get-Content dist/SHA256SUMS.txt
+
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
@@ -90,16 +112,41 @@ jobs:
           path: dist/*portable*.exe
           if-no-files-found: error
 
-      - name: Publish v1.0.0 release
-        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release InstaPower v1.0.0')
+      - name: Upload checksum artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: InstaPower-Windows-SHA256
+          path: dist/SHA256SUMS.txt
+          if-no-files-found: error
+
+      - name: Publish release
+        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release InstaPower v')
         shell: pwsh
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.ref }}
         run: |
-          $tag = 'v1.0.0'
+          $message = '${{ github.ref }}'
+          if ($message -notmatch '^Release InstaPower (v[0-9]+[.][0-9]+[.][0-9]+)') {
+            Write-Error "Release commit message must start with 'Release InstaPower vMAJOR.MINOR.PATCH'."
+            exit 1
+          }
+
+          $tag = $Matches[1]
+          $title = "InstaPower $tag"
+          $notes = @"
+          InstaPower $tag — Windows release.
+
+          Assets:
+          - Installer: setup wizard with selectable install directory.
+          - Portable: standalone executable with no installation.
+          - SHA256SUMS.txt: SHA-256 checksums for both Windows executables.
+
+          InstaPower is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta.
+          "@
+
           gh release view $tag 2>$null
           if ($LASTEXITCODE -eq 0) {
-            gh release upload $tag dist/*.exe --clobber
+            gh release upload $tag dist/*.exe dist/SHA256SUMS.txt --clobber
           } else {
-            gh release create $tag dist/*.exe --title 'InstaPower v1.0.0' --latest --notes 'InstaPower v1.0.0 — Windows release. Installer: setup wizard with selectable install directory. Portable: standalone executable with no installation. InstaPower is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta.'
+            gh release create $tag dist/*.exe dist/SHA256SUMS.txt --title $title --latest --notes $notes
           }
