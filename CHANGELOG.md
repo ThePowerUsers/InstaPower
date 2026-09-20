@@ -13,3 +13,8 @@ Initial Windows release.
 - Portable Windows executable
 - Electron security hardening
 - MIT-licensed open-source project
+
+### Packaging
+
+- Windows installer and portable builds use maximum compression.
+- Production packaging excludes unnecessary package metadata.
