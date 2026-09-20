@@ -31,6 +31,7 @@ InstaPower gives Instagram its own dedicated Windows desktop window while keepin
 
 ## 📥 Download InstaPower
 
+**Current release: v1.0.0**  
 **Windows 10/11**
 
 ### Installer
