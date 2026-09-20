@@ -47,7 +47,7 @@ jobs:
       - name: Build installer and portable executable
         shell: pwsh
         run: |
-          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ steps.forge-package.outputs.path }}"
+          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ steps.forge-package.outputs.path }}" --publish never
 
       - name: Verify Windows artifacts
         shell: pwsh
