@@ -3,6 +3,3 @@ contact_links:
   - name: Security vulnerability
     url: mailto:parstylus@gmail.com
     about: Please report security vulnerabilities privately. Do not open a public issue.
-  - name: GitHub Discussions
-    url: https://github.com/ThePowerUsers/InstaPower/discussions
-    about: Ask questions and discuss non-sensitive project topics.
