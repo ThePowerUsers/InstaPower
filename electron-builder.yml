@@ -3,7 +3,7 @@ productName: InstaPower
 directories:
   output: dist
 
-# Ship only the production bundle and package metadata. Everything else stays out.
+# Ship only the production bundle. Everything else stays out.
 files:
   - .webpack/**/*
 
@@ -11,7 +11,7 @@ files:
 asar: true
 compression: maximum
 
-# Avoid shipping unnecessary source maps and development metadata.
+# Avoid shipping unnecessary package scripts and metadata.
 removePackageScripts: true
 
 win:
@@ -33,7 +33,6 @@ nsis:
   shortcutName: InstaPower
   deleteAppDataOnUninstall: false
   artifactName: ${productName}-Setup-${version}-${arch}.${ext}
-  compression: maximum
 
 portable:
   artifactName: ${productName}-${version}-portable-${arch}.${ext}
