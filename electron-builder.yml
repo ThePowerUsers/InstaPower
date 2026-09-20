@@ -1,5 +1,5 @@
-appId: com.thepowerusers.veyra
-productName: Veyra
+appId: com.thepowerusers.instapower
+productName: InstaPower
 directories:
   output: dist
 files:
@@ -23,7 +23,7 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: always
   createStartMenuShortcut: true
-  shortcutName: Veyra
+  shortcutName: InstaPower
   deleteAppDataOnUninstall: false
   artifactName: ${productName}-Setup-${version}-${arch}.${ext}
 
