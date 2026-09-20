@@ -12,7 +12,7 @@
   &nbsp;·&nbsp;
   <a href="https://github.com/ThePowerUsers/InstaPower/issues">Issues</a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/ThePowerUsers/InstaPower/discussions">Discussions</a>
+  <a href="https://github.com/ThePowerUsers/InstaPower/issues">Support</a>
 </p>
 
 <p align="center">
@@ -162,6 +162,7 @@ InstaPower/
 Need help or found something unclear?
 
 - [Support guide](SUPPORT.md)
+- [GitHub Issues](https://github.com/ThePowerUsers/InstaPower/issues)
 - [Bug reports](https://github.com/ThePowerUsers/InstaPower/issues/new?template=bug_report.md)
 - [Feature requests](https://github.com/ThePowerUsers/InstaPower/issues/new?template=feature_request.md)
 - [Security policy](SECURITY.md)
