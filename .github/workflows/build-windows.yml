@@ -53,7 +53,7 @@ jobs:
       - name: Build installer and portable executable
         shell: pwsh
         run: |
-          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ github.ref }}" --publish never
+          npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ steps.forge-package.outputs.path }}" --publish never
 
       - name: Verify Windows artifacts
         shell: pwsh
@@ -123,9 +123,9 @@ jobs:
         if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release InstaPower v')
         shell: pwsh
         env:
-          GH_TOKEN: ${{ github.ref }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          $message = '${{ github.ref }}'
+          $message = '${{ github.event.head_commit.message }}'
           if ($message -notmatch '^Release InstaPower (v[0-9]+[.][0-9]+[.][0-9]+)') {
             Write-Error "Release commit message must start with 'Release InstaPower vMAJOR.MINOR.PATCH'."
             exit 1
