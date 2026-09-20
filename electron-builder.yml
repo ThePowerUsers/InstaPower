@@ -1,0 +1,31 @@
+appId: com.thepowerusers.veyra
+productName: Veyra
+directories:
+  output: dist
+files:
+  - .webpack/**/*
+  - package.json
+asar: true
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  artifactName: ${productName}-${version}-${arch}.${ext}
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Veyra
+  deleteAppDataOnUninstall: false
+  artifactName: ${productName}-Setup-${version}-${arch}.${ext}
+
+portable:
+  artifactName: ${productName}-${version}-portable-${arch}.${ext}
