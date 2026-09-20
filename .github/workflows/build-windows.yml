@@ -1,10 +1,13 @@
-name: Build InstaDesk for Windows
+name: Build Veyra for Windows
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
 
 jobs:
   build-windows:
@@ -26,9 +29,32 @@ jobs:
       - name: Build Windows installer
         run: npm run make
 
-      - name: Upload Windows installer
+      - name: Upload Windows build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: InstaDesk-Windows
+          name: Veyra-Windows
           path: out/make/**
           if-no-files-found: error
+
+      - name: Publish Veyra v1.0.0 release
+        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release Veyra v1.0.0')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $files = Get-ChildItem -Path "out/make" -Recurse -Filter "*.exe" | Select-Object -ExpandProperty FullName
+          if (-not $files) {
+            throw "No Windows installer .exe was produced."
+          }
+          gh release create "v1.0.0" $files --title "Veyra v1.0.0" --notes "Veyra v1.0.0 — first Windows release.
+
+A focused, unofficial Instagram desktop experience for Windows.
+
+Highlights:
+- Dedicated Instagram window
+- Persistent Instagram session
+- Separate Chromium session
+- Windows installer
+- Security-conscious Electron configuration
+
+Veyra is not affiliated with or endorsed by Instagram or Meta." --latest
