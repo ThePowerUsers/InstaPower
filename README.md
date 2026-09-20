@@ -20,6 +20,7 @@
   <img src="https://img.shields.io/github/actions/workflow/status/ThePowerUsers/InstaPower/build-windows.yml?style=flat-square&label=build" alt="Build status">
   <img src="https://img.shields.io/github/license/ThePowerUsers/InstaPower?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/ThePowerUsers/InstaPower?style=flat-square" alt="Stars">
+  <img src="https://img.shields.io/github/commit-activity/m/ThePowerUsers/InstaPower?style=flat-square&label=activity" alt="Commit activity">
 </p>
 
 ---
@@ -29,6 +30,14 @@
 **InstaPower** is an independent Windows desktop wrapper for the Instagram web experience, built with Electron.
 
 It keeps Instagram in a dedicated application window, uses its own persistent browser session, and avoids turning the app into a general-purpose browser.
+
+### Why InstaPower?
+
+- **Focused:** Instagram gets its own desktop window instead of another browser tab.
+- **Persistent:** Your Instagram web session can remain signed in between launches.
+- **Independent:** The app keeps its browser profile separate from your normal browser profile.
+- **Simple:** No custom account system, password vault, or separate Instagram credentials.
+- **Open source:** The source, build pipeline, security policy, and release artifacts are publicly reviewable.
 
 > **Unofficial project:** InstaPower is not affiliated with, endorsed by, or sponsored by Instagram or Meta.
 
@@ -43,6 +52,14 @@ It keeps Instagram in a dedicated application window, uses its own persistent br
 | 📦 | **Windows installer** | Normal setup wizard with a selectable installation directory. |
 | 🚀 | **Portable edition** | Standalone executable with no installation required. |
 | 🛡️ | **Security-minded** | Context isolation, sandboxing, disabled Node integration, and Electron security fuses. |
+
+## ⭐ Support the Project
+
+If InstaPower is useful to you, consider giving the repository a **Star** on GitHub. Stars help people discover the project and are a simple way to show support.
+
+**[⭐ Star InstaPower on GitHub](https://github.com/ThePowerUsers/InstaPower)**
+
+---
 
 ## Download
 
@@ -140,6 +157,15 @@ InstaPower/
 └── LICENSE               # MIT license
 ~~~
 
+## Support
+
+Need help or found something unclear?
+
+- [Support guide](SUPPORT.md)
+- [Bug reports](https://github.com/ThePowerUsers/InstaPower/issues/new?template=bug_report.md)
+- [Feature requests](https://github.com/ThePowerUsers/InstaPower/issues/new?template=feature_request.md)
+- [Security policy](SECURITY.md)
+
 ## Contributing
 
 Contributions, bug reports, documentation improvements, and feature ideas are welcome.
@@ -154,6 +180,10 @@ For bugs, use the [bug report template](https://github.com/ThePowerUsers/InstaPo
 For ideas, use the [feature request template](https://github.com/ThePowerUsers/InstaPower/issues/new?template=feature_request.md).
 
 **Never post passwords, cookies, session tokens, access tokens, or other sensitive information in public issues.**
+
+## Release History
+
+See [CHANGELOG.md](CHANGELOG.md) for the release history.
 
 ## Roadmap
 
@@ -187,3 +217,5 @@ Released under the [MIT License](LICENSE).
 **ThePowerUsers**
 
 Open-source Windows desktop software built with Electron.
+
+[GitHub](https://github.com/ThePowerUsers) · [InstaPower](https://github.com/ThePowerUsers/InstaPower) · [Releases](https://github.com/ThePowerUsers/InstaPower/releases)
