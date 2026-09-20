@@ -1,13 +1,13 @@
 const { app, BrowserWindow } = require('electron');
 
-// Keep InstaDesk to one running instance.
+// Keep Veyra to one running instance.
 const gotTheLock = app.requestSingleInstanceLock();
 
 if (!gotTheLock) {
   app.quit();
 } else {
   // Give Windows a stable application identity for notifications/taskbar integration.
-  app.setAppUserModelId('com.thepowerusers.instadesk');
+  app.setAppUserModelId('com.thepowerusers.veyra');
 
   // Handle creating/removing shortcuts on Windows when installing/uninstalling.
   if (require('electron-squirrel-startup')) {
@@ -18,7 +18,7 @@ if (!gotTheLock) {
 
   const createWindow = () => {
     mainWindow = new BrowserWindow({
-      name: 'instadesk-main',
+      name: 'veyra-main',
       width: 1280,
       height: 800,
       minWidth: 900,
@@ -34,7 +34,7 @@ if (!gotTheLock) {
       webPreferences: {
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
 
-        // Give InstaDesk its own persistent Instagram session.
+        // Give Veyra its own persistent Instagram session.
         partition: 'persist:instagram',
 
         // Keep remote Instagram content isolated from Node.js.
@@ -76,7 +76,7 @@ if (!gotTheLock) {
     });
   };
 
-  // If the user launches InstaDesk again, focus the existing window.
+  // If the user launches Veyra again, focus the existing window.
   app.on('second-instance', () => {
     if (!mainWindow || mainWindow.isDestroyed()) {
       return;
