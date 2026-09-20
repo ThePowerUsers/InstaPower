@@ -1,6 +1,6 @@
 {
-  "name": "veyra",
-  "productName": "Veyra",
+  "name": "instapower",
+  "productName": "InstaPower",
   "version": "1.0.0",
   "description": "A fast, focused Instagram desktop experience for Windows, built with Electron.",
   "main": ".webpack/main",
