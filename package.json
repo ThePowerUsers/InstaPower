@@ -1,8 +1,8 @@
 {
-  "name": "instadesk",
-  "productName": "InstaDesk",
+  "name": "veyra",
+  "productName": "Veyra",
   "version": "1.0.0",
-  "description": "Unofficial open-source Instagram desktop client for Windows.",
+  "description": "A fast, focused Instagram desktop experience for Windows, built with Electron.",
   "main": ".webpack/main",
   "private": true,
   "scripts": {
@@ -12,7 +12,14 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
-  "keywords": [],
+  "keywords": [
+    "instagram",
+    "desktop",
+    "electron",
+    "windows",
+    "social",
+    "client"
+  ],
   "author": {
     "name": "ThePowerUsers",
     "email": "ifuizu1@gmail.com"
