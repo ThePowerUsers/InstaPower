@@ -1,5 +1,10 @@
 appId: com.thepowerusers.instapower
 productName: InstaPower
+
+# Electron Forge keeps .webpack/main as its package entry directory.
+# electron-builder needs the concrete bundled entry file.
+extraMetadata:
+  main: .webpack/main/index.js
 directories:
   output: dist
 
