@@ -1,4 +1,4 @@
-name: Build Veyra for Windows
+name: Build InstaPower for Windows
 
 on:
   workflow_dispatch:
@@ -35,19 +35,19 @@ jobs:
       - name: Upload Windows installer
         uses: actions/upload-artifact@v4
         with:
-          name: Veyra-Windows-Installer
+          name: InstaPower-Windows-Installer
           path: dist/*Setup*.exe
           if-no-files-found: error
 
       - name: Upload portable Windows executable
         uses: actions/upload-artifact@v4
         with:
-          name: Veyra-Windows-Portable
+          name: InstaPower-Windows-Portable
           path: dist/*portable*.exe
           if-no-files-found: error
 
-      - name: Publish Veyra v1.0.0 release
-        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release Veyra v1.0.0')
+      - name: Publish InstaPower v1.0.0 release
+        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Release InstaPower v1.0.0')
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -56,7 +56,7 @@ jobs:
           if (-not $files) {
             throw "No Windows executable artifacts were produced."
           }
-          gh release create "v1.0.0" $files --title "Veyra v1.0.0" --notes "Veyra v1.0.0 — Windows release.
+          gh release create "v1.0.0" $files --title "InstaPower v1.0.0" --notes "InstaPower v1.0.0 — Windows release.
 
 Installer:
 - Full setup wizard
@@ -69,4 +69,4 @@ Portable:
 - No installation required
 - Runs directly from a folder, USB drive, or other location
 
-Veyra is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta." --latest
+InstaPower is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta." --latest
