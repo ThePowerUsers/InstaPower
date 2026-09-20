@@ -1,22 +1,13 @@
 appId: com.thepowerusers.instapower
 productName: InstaPower
 
-# Electron Forge keeps .webpack/main as its package entry directory.
-# electron-builder needs the concrete bundled entry file.
-extraMetadata:
-  main: .webpack/main/index.js
+# Electron Forge creates the fully bundled Windows app in out/*-win32-x64.
+# The Windows workflow passes that prepackaged directory to electron-builder.
 directories:
   output: dist
 
-# Ship only the production bundle. Everything else stays out.
-files:
-  - .webpack/**/*
-
-# Maximum compression for the packaged app.
 asar: true
 compression: maximum
-
-# Avoid shipping unnecessary package scripts and metadata.
 removePackageScripts: true
 
 win:
