@@ -53,7 +53,7 @@ if (!gotTheLock) {
   }
 
   const APP_ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><defs><linearGradient id="b" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#0b1235"/><stop offset=".55" stop-color="#18245f"/><stop offset="1" stop-color="#24145f"/></linearGradient><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#64e8ff"/><stop offset=".48" stop-color="#8b35ff"/><stop offset="1" stop-color="#ff6b4a"/></linearGradient></defs><rect x="18" y="18" width="476" height="476" rx="112" fill="url(#b)" stroke="#6475ff" stroke-width="8"/><path d="M18 190C94 56 244 22 356 28C248 63 148 126 98 244C71 307 64 371 75 494H18Z" fill="#7a36ff" opacity=".9"/><path d="M494 318C439 426 334 483 212 494C316 448 390 369 420 270C444 192 439 102 412 18H494Z" fill="#d92bdf" opacity=".75"/><rect x="96" y="96" width="320" height="320" rx="72" fill="#0c133d" stroke="#f4f5ff" stroke-width="28"/><circle cx="360" cy="150" r="25" fill="#ff6b70"/><path d="M271 135L158 270H251L224 383L361 229H266Z" fill="url(#g)"/></svg>';
-  const getAppIcon = (size = 512) => nativeImage.createFromDataURL('data:image/svg+xml;base64,' + Buffer.from(APP_ICON_SVG.replaceAll('512', String(size))).toString('base64'));
+  const getAppIcon = () => nativeImage.createFromDataURL('data:image/svg+xml;base64,' + Buffer.from(APP_ICON_SVG).toString('base64'));
 
   let settings = loadSettings();
 
@@ -82,7 +82,7 @@ if (!gotTheLock) {
   }
 
   function getTrayIcon() {
-    return getAppIcon(16);
+    return getAppIcon();
   }
 
   function buildTrayMenu() {
@@ -152,7 +152,7 @@ if (!gotTheLock) {
       parent: mainWindow || undefined,
       show: false,
       backgroundColor: '#111111',
-      icon: getAppIcon(256),
+      icon: getAppIcon(),
       webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true },
     });
 
