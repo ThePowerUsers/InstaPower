@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 concurrency:
   group: windows-release-${{ github.ref }}
@@ -30,6 +32,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run automated tests
+        run: npm test
+
+      - name: Generate dependency SBOM
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          npm sbom --sbom-format cyclonedx | Set-Content -Path dist/SBOM.cdx.json -Encoding utf8
+
       - name: Prepare production bundle
         run: npm run package
 
@@ -52,6 +63,9 @@ jobs:
 
       - name: Build installer and portable executable
         shell: pwsh
+        env:
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
         run: |
           npx --yes electron-builder@26.15.3 --win nsis portable --prepackaged "${{ steps.forge-package.outputs.path }}" --publish never
 
@@ -94,9 +108,17 @@ jobs:
           }
 
           $lines | Set-Content -Path dist/SHA256SUMS.txt -Encoding ascii
-
-          Write-Host "SHA256SUMS.txt:"
           Get-Content dist/SHA256SUMS.txt
+
+      - name: Attest installer provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: 'dist/*Setup*.exe'
+
+      - name: Attest portable provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: 'dist/*portable*.exe'
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
@@ -117,6 +139,13 @@ jobs:
         with:
           name: InstaPower-Windows-SHA256
           path: dist/SHA256SUMS.txt
+          if-no-files-found: error
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: InstaPower-Windows-SBOM
+          path: dist/SBOM.cdx.json
           if-no-files-found: error
 
       - name: Publish release
@@ -140,13 +169,16 @@ jobs:
           - Installer: setup wizard with selectable install directory.
           - Portable: standalone executable with no installation.
           - SHA256SUMS.txt: SHA-256 checksums for both Windows executables.
+          - SBOM.cdx.json: CycloneDX dependency inventory for the build.
+
+          Build provenance attestations are generated for the Windows executables.
 
           InstaPower is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta.
           "@
 
           gh release view $tag 2>$null
           if ($LASTEXITCODE -eq 0) {
-            gh release upload $tag dist/*.exe dist/SHA256SUMS.txt --clobber
+            gh release upload $tag dist/*.exe dist/SHA256SUMS.txt dist/SBOM.cdx.json --clobber
           } else {
-            gh release create $tag dist/*.exe dist/SHA256SUMS.txt --title $title --latest --notes $notes
+            gh release create $tag dist/*.exe dist/SHA256SUMS.txt dist/SBOM.cdx.json --title $title --latest --notes $notes
           }
