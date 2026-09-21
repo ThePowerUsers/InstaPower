@@ -11,16 +11,15 @@ permissions:
   attestations: write
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 concurrency:
   group: windows-release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  cleanup-superseded-release:
-    if: startsWith(github.event.head_commit.message, 'ADMIN: delete superseded v1.1.0')
-    runs-on: ubuntu-latest
+  build-windows:
+    runs-on: windows-latest
     steps:
       - name: Delete v1.1.0 release and tag
         env:
