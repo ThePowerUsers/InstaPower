@@ -1,6 +1,6 @@
 # Changelog
 
-## InstaPower v1.1.0
+## InstaPower v1.1.1
 
 ### Desktop experience
 
@@ -19,9 +19,11 @@
 
 ### Release infrastructure
 
-- Added CycloneDX dependency SBOM generation.
 - Added GitHub artifact provenance attestations for Windows executables.
-- Added optional Windows signing credential wiring through GitHub Actions secrets; no credentials are stored in the repository.
+- Added Windows publisher metadata and optional Authenticode signing through GitHub Actions secrets; no credentials are stored in the repository.
+- Added branded application icons and professional Windows artifact names.
+- Reduced bundled Electron locales and optimized the portable target for faster extraction.
+- Added product preview and settings visuals to the project documentation.
 
 ## InstaPower v1.0.0
 
