@@ -73,7 +73,7 @@ If you use InstaPower and find it useful, a genuine star helps other developers 
 
 ### Windows 10 / 11
 
-**Current release:** v1.1.0  
+**Current release:** v1.1.0 — desktop integration + security/release infrastructure batch  
 **Latest stable release:** [GitHub Releases](https://github.com/ThePowerUsers/InstaPower/releases/latest)
 
 **Installer** — recommended for a normal Windows installation.  
