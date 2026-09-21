@@ -119,6 +119,14 @@ Security is treated as a first-class part of the project.
 
 For vulnerability reporting, see **[SECURITY.md](SECURITY.md)**.
 
+## Code signing policy
+
+**Free code signing provided by SignPath.io, certificate by SignPath Foundation.**
+
+InstaPower's Windows release binaries are intended to be signed through SignPath Foundation when the project is accepted into the program. SignPath's GitHub integration provides origin verification between the repository, GitHub Actions build, and signed release artifact.
+
+See the project's [Code signing policy](CODE_SIGNING.md) for the signing roles, privacy information, signed artifacts, and fallback process.
+
 ## Development
 
 ### Stack
