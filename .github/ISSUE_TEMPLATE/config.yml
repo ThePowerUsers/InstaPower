@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: mailto:parstylus@gmail.com
-    about: Please report security vulnerabilities privately. Do not open a public issue.
+    url: https://github.com/ThePowerUsers/InstaPower/security/advisories/new
+    about: Report security vulnerabilities privately through GitHub. Do not open a public issue.
