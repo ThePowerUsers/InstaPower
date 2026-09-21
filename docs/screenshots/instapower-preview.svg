@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-label="InstaPower product preview">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07102a"/><stop offset=".55" stop-color="#16265d"/><stop offset="1" stop-color="#40175f"/></linearGradient>
+ <linearGradient id="accent" x1="0" x2="1"><stop stop-color="#5d36ff"/><stop offset=".6" stop-color="#db28db"/><stop offset="1" stop-color="#ff704e"/></linearGradient>
+</defs>
+<rect width="1536" height="1024" fill="url(#bg)"/>
+<circle cx="1270" cy="170" r="300" fill="#7437ff" opacity=".13"/><circle cx="260" cy="850" r="340" fill="#2a72ff" opacity=".12"/>
+<text x="768" y="108" text-anchor="middle" fill="#fff" font-family="Segoe UI,Arial" font-size="58" font-weight="700">InstaPower</text>
+<text x="768" y="153" text-anchor="middle" fill="#b9c8ff" font-family="Segoe UI,Arial" font-size="25">Instagram. Better. On Desktop.</text>
+<g transform="translate(72 230)">
+ <rect width="650" height="690" rx="22" fill="#080d19" stroke="#344a82"/>
+ <rect width="145" height="690" rx="22" fill="#0d1527"/>
+ <text x="28" y="55" fill="#fff" font-family="Segoe UI,Arial" font-size="23" font-weight="700">⚡ InstaPower</text>
+ <g fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="18"><text x="28" y="112">⌂  Home</text><text x="28" y="158">⌕  Search</text><text x="28" y="204">◉  Explore</text><text x="28" y="250">▣  Reels</text><text x="28" y="296">◌  Messages</text><text x="28" y="342">♡  Notifications</text><text x="28" y="388">＋  Create</text><text x="28" y="434">◎  Profile</text></g>
+ <rect x="170" y="80" width="440" height="50" rx="16" fill="#121c31"/>
+ <g fill="#ff7a9d"><circle cx="198" cy="105" r="18"/><circle cx="250" cy="105" r="18"/><circle cx="302" cy="105" r="18"/><circle cx="354" cy="105" r="18"/><circle cx="406" cy="105" r="18"/></g>
+ <rect x="170" y="150" width="440" height="465" rx="18" fill="#111a2a"/>
+ <rect x="190" y="170" width="400" height="270" rx="12" fill="#244f78"/>
+ <path d="M190 385L285 280L350 335L415 250L590 440H190Z" fill="#527fa4"/><circle cx="470" cy="245" r="35" fill="#ffd36a"/>
+ <text x="190" y="475" fill="#fff" font-family="Segoe UI,Arial" font-size="20" font-weight="600">naturevibes</text><text x="190" y="510" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="16">A beautiful moment on the feed.</text><text x="190" y="550" fill="#fff" font-family="Segoe UI,Arial" font-size="16">♡  2,846 likes   ◌  126 comments</text>
+ </g>
+<g transform="translate(790 230)">
+ <rect width="674" height="690" rx="22" fill="#0b1120" stroke="#344a82"/>
+ <rect width="190" height="690" rx="22" fill="#0f1729"/>
+ <text x="32" y="58" fill="#fff" font-family="Segoe UI,Arial" font-size="25" font-weight="700">Settings</text>
+ <g fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="17"><text x="32" y="116">⚙  General</text><text x="32" y="160">♧  Notifications</text><text x="32" y="204">↻  Updates</text><text x="32" y="248">⇩  Downloads</text><text x="32" y="292">⌨  Shortcuts</text><text x="32" y="336">◈  Security</text><text x="32" y="380">ⓘ  About</text></g>
+ <text x="225" y="75" fill="#fff" font-family="Segoe UI,Arial" font-size="22" font-weight="600">General</text>
+ <rect x="225" y="105" width="410" height="190" rx="16" fill="#121c31"/>
+ <text x="248" y="140" fill="#fff" font-family="Segoe UI,Arial" font-size="17">Startup &amp; Window</text>
+ <text x="248" y="178" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="14">Launch at Windows startup</text><rect x="575" y="163" width="38" height="20" rx="10" fill="#4385ff"/><circle cx="602" cy="173" r="7" fill="#fff"/>
+ <text x="248" y="218" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="14">Minimize to tray on close</text><rect x="575" y="203" width="38" height="20" rx="10" fill="#4385ff"/><circle cx="602" cy="213" r="7" fill="#fff"/>
+ <text x="248" y="258" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="14">Remember window size</text><rect x="575" y="243" width="38" height="20" rx="10" fill="#4385ff"/><circle cx="602" cy="253" r="7" fill="#fff"/>
+ <rect x="225" y="318" width="410" height="170" rx="16" fill="#121c31"/><text x="248" y="353" fill="#fff" font-family="Segoe UI,Arial" font-size="17">Notifications</text><text x="248" y="391" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="14">Native Windows notifications</text><rect x="575" y="376" width="38" height="20" rx="10" fill="#4385ff"/><circle cx="602" cy="386" r="7" fill="#fff"/><text x="248" y="432" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="14">Automatic update checks</text><rect x="575" y="417" width="38" height="20" rx="10" fill="#4385ff"/><circle cx="602" cy="427" r="7" fill="#fff"/>
+ <rect x="225" y="512" width="410" height="112" rx="16" fill="#121c31"/><text x="248" y="550" fill="#fff" font-family="Segoe UI,Arial" font-size="17">About InstaPower</text><text x="248" y="580" fill="#b9c4dc" font-family="Segoe UI,Arial" font-size="14">Windows desktop client • ThePowerUsers</text><text x="248" y="607" fill="#777" font-family="Segoe UI,Arial" font-size="13">Version 1.1.x</text>
+</g></svg>
