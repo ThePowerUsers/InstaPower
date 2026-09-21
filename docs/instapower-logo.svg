@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="InstaPower logo">
+<defs><linearGradient id="word" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#6b36ff"/><stop offset=".55" stop-color="#d72cff"/><stop offset="1" stop-color="#ff6b4d"/></linearGradient></defs>
+<rect x="30" y="30" width="300" height="300" rx="72" fill="#10183f" stroke="#6f6fff" stroke-width="6"/>
+<path d="M30 130C82 48 183 30 267 33C188 58 113 106 82 183C65 224 62 269 70 330H30Z" fill="url(#word)"/>
+<rect x="88" y="88" width="184" height="184" rx="46" fill="#0b1235" stroke="#f7f7ff" stroke-width="17"/>
+<circle cx="232" cy="120" r="14" fill="#ff6b70"/>
+<path d="M188 111L119 192H175L158 253L241 161H184Z" fill="url(#word)"/>
+<text x="375" y="222" font-family="Segoe UI, Arial, sans-serif" font-size="142" font-weight="700" letter-spacing="-5"><tspan fill="#10183f">Insta</tspan><tspan fill="url(#word)">Power</tspan></text>
+</svg>
