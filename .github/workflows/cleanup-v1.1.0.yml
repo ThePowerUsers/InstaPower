@@ -1,0 +1,32 @@
+name: Remove superseded v1.1.0 release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: startsWith(github.event.head_commit.message, 'ADMIN: delete superseded v1.1.0')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete v1.1.0 release and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release delete v1.1.0 --repo "${{ github.repository }}" --cleanup-tag --yes
+
+      - name: Remove one-time cleanup workflow
+        uses: actions/checkout@v5
+
+      - name: Commit cleanup
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/cleanup-v1.1.0.yml
+          git commit -m "chore: remove one-time release cleanup workflow"
+          git push
