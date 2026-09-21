@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
   id-token: write
   attestations: write
 
@@ -69,8 +70,8 @@ jobs:
       - name: Verify Windows artifacts
         shell: pwsh
         run: |
-          $installer = Get-ChildItem -Path dist -Filter '*Setup*.exe' -File
-          $portable = Get-ChildItem -Path dist -Filter '*portable*.exe' -File
+          $installer = Get-ChildItem -Path dist -Filter '*Setup*.exe' -File | Select-Object -First 1
+          $portable = Get-ChildItem -Path dist -Filter '*portable*.exe' -File | Select-Object -First 1
 
           if (-not $installer) {
             Write-Error "NSIS installer was not produced."
@@ -82,13 +83,85 @@ jobs:
             exit 1
           }
 
-          Write-Host "Installer:"
-          $installer | Select-Object Name, Length | Format-Table -AutoSize
-          Write-Host "Portable:"
-          $portable | Select-Object Name, Length | Format-Table -AutoSize
+          Write-Host "Installer: $($installer.Name)"
+          Write-Host "Portable: $($portable.Name)"
+
+      - name: Upload installer for SignPath
+        id: upload-installer-signpath
+        if: ${{ secrets.SIGNPATH_API_TOKEN != '' && secrets.SIGNPATH_ORGANIZATION_ID != '' && secrets.SIGNPATH_PROJECT_SLUG != '' && secrets.SIGNPATH_SIGNING_POLICY_SLUG != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/*Setup*.exe
+          archive: false
+          if-no-files-found: error
+
+      - name: Submit installer signing request to SignPath
+        if: ${{ steps.upload-installer-signpath.outcome == 'success' }}
+        uses: signpath/github-action-submit-signing-request@v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ secrets.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ secrets.SIGNPATH_SIGNING_POLICY_SLUG }}
+          github-artifact-id: ${{ steps.upload-installer-signpath.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: ${{ runner.temp }}\signpath-installer
+          skip-decompress: true
+          parameters: |
+            version: "${{ github.ref_name }}"
+
+      - name: Replace installer with SignPath-signed artifact
+        if: ${{ steps.upload-installer-signpath.outcome == 'success' }}
+        shell: pwsh
+        run: |
+          $signed = Get-ChildItem -Path "${{ runner.temp }}\signpath-installer" -Filter '*.exe' -File | Select-Object -First 1
+          if (-not $signed) {
+            Write-Error "SignPath did not return a signed installer executable."
+            exit 1
+          }
+          $target = Get-ChildItem -Path dist -Filter '*Setup*.exe' -File | Select-Object -First 1
+          Copy-Item -Path $signed.FullName -Destination $target.FullName -Force
+
+      - name: Upload portable for SignPath
+        id: upload-portable-signpath
+        if: ${{ secrets.SIGNPATH_API_TOKEN != '' && secrets.SIGNPATH_ORGANIZATION_ID != '' && secrets.SIGNPATH_PROJECT_SLUG != '' && secrets.SIGNPATH_SIGNING_POLICY_SLUG != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/*portable*.exe
+          archive: false
+          if-no-files-found: error
+
+      - name: Submit portable signing request to SignPath
+        if: ${{ steps.upload-portable-signpath.outcome == 'success' }}
+        uses: signpath/github-action-submit-signing-request@v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ secrets.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ secrets.SIGNPATH_SIGNING_POLICY_SLUG }}
+          github-artifact-id: ${{ steps.upload-portable-signpath.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: ${{ runner.temp }}\signpath-portable
+          skip-decompress: true
+          parameters: |
+            version: "${{ github.ref_name }}"
+
+      - name: Replace portable with SignPath-signed artifact
+        if: ${{ steps.upload-portable-signpath.outcome == 'success' }}
+        shell: pwsh
+        run: |
+          $signed = Get-ChildItem -Path "${{ runner.temp }}\signpath-portable" -Filter '*.exe' -File | Select-Object -First 1
+          if (-not $signed) {
+            Write-Error "SignPath did not return a signed portable executable."
+            exit 1
+          }
+          $target = Get-ChildItem -Path dist -Filter '*portable*.exe' -File | Select-Object -First 1
+          Copy-Item -Path $signed.FullName -Destination $target.FullName -Force
 
       - name: Verify Authenticode signing status
         shell: pwsh
+        env:
+          SIGNPATH_ENABLED: ${{ secrets.SIGNPATH_API_TOKEN != '' && secrets.SIGNPATH_ORGANIZATION_ID != '' && secrets.SIGNPATH_PROJECT_SLUG != '' && secrets.SIGNPATH_SIGNING_POLICY_SLUG != '' }}
         run: |
           $executables = Get-ChildItem -Path dist -Filter '*.exe' -File |
             Where-Object { $_.Name -match 'Setup|portable' }
@@ -97,21 +170,19 @@ jobs:
             $signature = Get-AuthenticodeSignature -FilePath $exe.FullName
             Write-Host "$($exe.Name): $($signature.Status) / $($signature.SignerCertificate.Subject)"
 
-            if ($env:WIN_CSC_LINK) {
+            if ($env:SIGNPATH_ENABLED -eq 'true') {
               if ($signature.Status -ne 'Valid') {
                 Write-Error "Expected a valid Authenticode signature for $($exe.Name), but got $($signature.Status)."
                 exit 1
               }
-              if ($signature.SignerCertificate.Subject -notmatch 'ThePowerUsers') {
-                Write-Error "Signed publisher for $($exe.Name) does not identify ThePowerUsers."
+              if ($signature.SignerCertificate.Subject -notmatch 'SignPath Foundation') {
+                Write-Error "Expected a SignPath Foundation signature for $($exe.Name), but got $($signature.SignerCertificate.Subject)."
                 exit 1
               }
             } else {
-              Write-Warning "No WIN_CSC_LINK secret is configured; this build is unsigned and Windows may show Unknown Publisher."
+              Write-Warning "SignPath is not configured yet; this build is unsigned and Windows may show Unknown Publisher."
             }
           }
-        env:
-          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
 
       - name: Generate SHA256 checksums
         shell: pwsh
@@ -144,21 +215,21 @@ jobs:
           subject-path: 'dist/*portable*.exe'
 
       - name: Upload installer artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: InstaPower-Windows-Installer
           path: dist/*Setup*.exe
           if-no-files-found: error
 
       - name: Upload portable artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: InstaPower-Windows-Portable
           path: dist/*portable*.exe
           if-no-files-found: error
 
       - name: Upload checksum artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: InstaPower-Windows-SHA256
           path: dist/SHA256SUMS.txt
@@ -182,11 +253,12 @@ jobs:
           InstaPower $tag — Windows release.
 
           Assets:
-          - `InstaPower-$($tag.TrimStart('v'))-Setup-x64.exe`: Windows setup wizard.
-          - `InstaPower-$($tag.TrimStart('v'))-portable-x64.exe`: no-install portable build.
+          - InstaPower-$($tag.TrimStart('v'))-Setup-x64.exe: Windows setup wizard.
+          - InstaPower-$($tag.TrimStart('v'))-portable-x64.exe: no-install portable build.
           - SHA256SUMS.txt: SHA-256 checksums for both Windows executables.
 
           Build provenance attestations are generated for the Windows executables.
+          Code signing is provided through SignPath Foundation when enabled for the project.
 
           InstaPower is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta.
           "@
