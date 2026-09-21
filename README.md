@@ -85,7 +85,7 @@ The previews above illustrate the current desktop direction and settings experie
 
 ### Windows 10 / 11
 
-**Current release:** v1.1.1 — polished branding, Windows packaging, performance, and security updatesntegration + security/release infrastructure batch  
+**Current release:** v1.1.1 — polished branding, Windows packaging, performance, and security updates  
 **Latest stable release:** [GitHub Releases](https://github.com/ThePowerUsers/InstaPower/releases/latest)
 
 **Installer** — recommended for a normal Windows installation.  
