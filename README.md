@@ -51,7 +51,13 @@ It keeps Instagram in a dedicated application window, uses its own persistent br
 | ⚡ | **Focused experience** | No browser address bar or unrelated browser UI. |
 | 📦 | **Windows installer** | Normal setup wizard with a selectable installation directory. |
 | 🚀 | **Portable edition** | Standalone executable with no installation required. |
-| 🛡️ | **Security-minded** | Context isolation, sandboxing, disabled Node integration, and Electron security fuses. |
+| 🛡️ | **Security-minded** | Context isolation, sandboxing, disabled Node integration, permission controls, HTTPS-only remote resources, and Electron security fuses. |
+| ⚙️ | **Settings panel** | Native app settings for startup, tray behavior, notifications, and update checks. |
+| 🪟 | **Windows integration** | System tray support and optional launch-at-login behavior. |
+| 🔔 | **Native notifications** | Windows notifications for downloads and available updates. |
+| ⌨️ | **Keyboard shortcuts** | Ctrl/Cmd+Shift+S for settings, +R to reload, and +M to minimize. |
+| 🔄 | **Update checking** | Periodic GitHub release checks with a manual check option. |
+| 📥 | **Download handling** | Save downloaded files through a native Windows save dialog. |
 
 ## ⭐ Support the Project
 
@@ -149,6 +155,7 @@ The Windows installer and portable executable are produced in dist/.
 ~~~text
 InstaPower/
 ├── .github/              # CI, issue templates, dependency automation
+├── test/                 # Automated project smoke tests
 ├── src/                  # Electron application source
 ├── forge.config.js       # Electron Forge configuration
 ├── electron-builder.yml  # Windows distribution configuration
@@ -191,16 +198,20 @@ See [CHANGELOG.md](CHANGELOG.md) for the release history.
 
 ## Roadmap
 
-The project is intentionally focused. Planned improvements include:
+The current roadmap is now implemented through the desktop-integration batch, with the remaining release/signing work dependent on production credentials and ongoing maintenance.
 
-- Desktop notifications
-- Better Windows integration
-- Tray support
-- Application settings
-- Update support
-- Improved downloads handling
-- Additional performance and stability work
-- Expanded automated testing
+- [x] ⚙️ Settings panel
+- [x] 🪟 System tray + Windows integration
+- [x] 🔔 Native desktop notifications
+- [x] ⌨️ Keyboard shortcuts
+- [x] 🔄 Automatic update checking
+- [x] 🚀 Performance & reliability improvements
+- [x] 📥 Download handling
+- [x] 🧪 Automated smoke testing
+- [x] 🛡️ Deeper Electron security hardening
+- [x] 🏆 Professional release infrastructure, checksums, SBOM, and build provenance
+- [ ] 🔐 Production Windows code signing — enable after a real signing certificate/Trusted Signing credentials are configured in GitHub Actions
+- [ ] 🚀 Polished v2 desktop experience
 
 The roadmap is subject to change as the project evolves.
 
