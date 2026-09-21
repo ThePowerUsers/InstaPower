@@ -18,7 +18,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  cleanup-superseded-release:
+    if: startsWith(github.event.head_commit.message, 'ADMIN: delete superseded v1.1.0')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete v1.1.0 release and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release delete v1.1.0 --repo "${{ github.repository }}" --cleanup-tag --yes
+
   build-windows:
+    if: ${{ !startsWith(github.event.head_commit.message, 'ADMIN: delete superseded v1.1.0') }}
     runs-on: windows-latest
     steps:
       - name: Checkout
