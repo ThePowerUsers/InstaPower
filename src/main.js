@@ -54,6 +54,16 @@ if (!gotTheLock) {
 
   let settings = loadSettings();
 
+  function refreshUpdateTimer() {
+    if (updateTimer) {
+      clearInterval(updateTimer);
+      updateTimer = null;
+    }
+    if (settings.automaticUpdateChecks) {
+      updateTimer = setInterval(() => checkForUpdates(false), 6 * 60 * 60 * 1000);
+    }
+  }
+
   function notify(title, body, onClick) {
     if (!settings.notifications || !Notification.isSupported()) return;
     const notification = new Notification({ title, body });
@@ -256,6 +266,17 @@ if (!gotTheLock) {
       if (errorCode !== -3) console.error('Instagram failed to load: ' + errorCode + ' - ' + errorDescription);
     });
 
+    // Only grant browser permissions to the trusted Instagram origin.
+    mainWindow.webContents.session.setPermissionRequestHandler((webContents, permission, callback) => {
+      const url = webContents.getURL();
+      callback(permission === 'notifications' && url.startsWith('https://www.instagram.com/'));
+    });
+
+    // Do not allow insecure HTTP resources inside the remote Instagram session.
+    mainWindow.webContents.session.webRequest.onBeforeRequest((details, callback) => {
+      callback({ cancel: details.url.startsWith('http://') });
+    });
+
     mainWindow.webContents.on('render-process-gone', (_event, details) => {
       if (details.reason !== 'clean-exit' && mainWindow && !mainWindow.isDestroyed()) {
         setTimeout(() => { if (mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.reload(); }, 1000);
@@ -295,9 +316,9 @@ if (!gotTheLock) {
     createTray();
     createWindow();
 
+    refreshUpdateTimer();
     if (settings.automaticUpdateChecks) {
       setTimeout(() => checkForUpdates(false), 15000);
-      updateTimer = setInterval(() => checkForUpdates(false), 6 * 60 * 60 * 1000);
     }
 
     app.on('activate', () => {
