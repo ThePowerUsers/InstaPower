@@ -1,6 +1,6 @@
 # Changelog
 
-## InstaPower v1.1.1
+## InstaPower v1.1.1 — 2026-09-21
 
 ### Desktop experience
 
