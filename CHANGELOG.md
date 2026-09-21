@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## InstaPower v1.1.0
 
 ### Desktop experience
 
