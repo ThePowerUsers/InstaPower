@@ -6,8 +6,8 @@ Security fixes are provided for the latest published version of InstaPower.
 
 | Version | Supported |
 | --- | --- |
-| 1.0.x | Yes |
-| < 1.0 | No |
+| 1.1.x | Yes |
+| < 1.1 | No |
 
 If you are using an older release, please update to the latest version before reporting an issue unless the vulnerability prevents you from doing so.
 
@@ -15,9 +15,11 @@ If you are using an older release, please update to the latest version before re
 
 **Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
 
-Report suspected vulnerabilities privately to:
+Use GitHub's private security reporting flow:
 
-**parstylus@gmail.com**
+**[Report a vulnerability privately](https://github.com/ThePowerUsers/InstaPower/security/advisories/new)**
+
+If private vulnerability reporting is unavailable for the repository, use the repository's Security tab to review the currently available private reporting options. Do not post exploit details publicly.
 
 Please include, where possible:
 
@@ -35,23 +37,13 @@ Please do not include real passwords, authentication tokens, session cookies, pr
 
 We aim to acknowledge valid security reports as soon as reasonably possible and will work with the reporter to understand, reproduce, remediate, and responsibly disclose confirmed vulnerabilities.
 
-Please allow reasonable time for investigation and remediation before making a vulnerability public. We may ask for additional technical information or a safe reproduction case.
-
-For confirmed vulnerabilities, the project may:
-
-1. Validate the report and determine its affected versions and impact.
-2. Develop and test a fix.
-3. Release a patched version.
-4. Credit the reporter if they request credit and it is appropriate to do so.
-5. Publish a security advisory when appropriate.
-
-We will not request passwords, account recovery codes, authentication cookies, or other credentials as part of an investigation.
+Please allow reasonable time for investigation and remediation before making a vulnerability public.
 
 ## Scope
 
 Security reports are relevant to the InstaPower application, its source code, release packaging, build configuration, update/release process, and project-controlled infrastructure.
 
-Issues in Instagram, Meta, Windows, Electron, Chromium, npm packages, or other third-party software should normally be reported to the appropriate upstream security team as well. If an upstream issue materially affects InstaPower, please tell us how it affects the application so we can assess mitigations or updates.
+Issues in Instagram, Meta, Windows, Electron, Chromium, npm packages, or other third-party software should normally be reported to the appropriate upstream security team as well. If an upstream issue materially affects InstaPower, please explain how it affects the application so we can assess mitigations or updates.
 
 ## Responsible Disclosure
 
@@ -65,12 +57,14 @@ InstaPower is designed with security boundaries appropriate for an Electron appl
 
 - Context isolation for renderer/preload boundaries.
 - Node.js integration disabled for remote page content.
-- Electron sandboxing where supported by the application architecture.
+- Electron sandboxing.
 - A minimal preload/IPC surface.
 - A dedicated persistent application session rather than sharing the user's Microsoft Edge profile.
 - No custom storage of Instagram passwords.
 - No private or reverse-engineered Instagram APIs.
 - No intentional collection of Instagram credentials by the application.
+- HTTPS-only request enforcement for the remote Instagram session.
+- Origin-scoped browser notification permissions.
 
 Security-sensitive changes should preserve these boundaries and should be reviewed carefully before release.
 
@@ -80,10 +74,10 @@ The project uses npm dependencies and automated GitHub Actions builds. Security 
 
 Where appropriate, maintainers may use GitHub security features, Dependabot alerts, repository security advisories, and private vulnerability reporting to coordinate remediation.
 
-## Contact
+## Project
 
-**Security contact:** parstylus@gmail.com  
 **Project:** InstaPower  
+**Maintainer:** ThePowerUsers  
 **Repository:** https://github.com/ThePowerUsers/InstaPower
 
 Thank you for helping keep InstaPower and its users secure.
