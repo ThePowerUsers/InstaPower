@@ -1,5 +1,14 @@
 # Changelog
 
+## InstaPower v1.1.2 — 2026-09-21
+
+### Reliability and release infrastructure
+
+- Fixed the Windows GitHub Actions workflow so the production build completes successfully.
+- Restored a stable unsigned release path while SignPath Foundation application review is pending.
+- Kept Windows installer, portable build, SHA-256 checksums, and build provenance in the release pipeline.
+
+
 ## InstaPower v1.1.1 — 2026-09-21
 
 ### Desktop experience
