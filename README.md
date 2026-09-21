@@ -69,11 +69,23 @@ If you use InstaPower and find it useful, a genuine star helps other developers 
 
 ---
 
+## Product Preview
+
+![InstaPower desktop preview](docs/screenshots/instapower-preview.svg)
+
+![InstaPower settings preview](docs/screenshots/settings-preview.svg)
+
+The previews above illustrate the current desktop direction and settings experience.
+
+## Branding
+
+![InstaPower logo](docs/instapower-logo.svg)
+
 ## Download
 
 ### Windows 10 / 11
 
-**Current release:** v1.1.0 — desktop integration + security/release infrastructure batch  
+**Current release:** v1.1.1 — polished branding, Windows packaging, performance, and security updatesntegration + security/release infrastructure batch  
 **Latest stable release:** [GitHub Releases](https://github.com/ThePowerUsers/InstaPower/releases/latest)
 
 **Installer** — recommended for a normal Windows installation.  
@@ -81,14 +93,13 @@ Includes a setup wizard with an installation-location choice and Start Menu/Desk
 
 **Portable** — run the standalone executable directly without installing the application.
 
-### v1.1.0
+### v1.1.1
 
-- [InstaPower Setup 1.1.0 x64](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/InstaPower-Setup-1.1.0-x64.exe)
-- [InstaPower Portable 1.1.0 x64](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/InstaPower-1.1.0-portable-x64.exe)
-- [SHA256SUMS.txt](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/SHA256SUMS.txt)
-- [Release notes](https://github.com/ThePowerUsers/InstaPower/releases/tag/v1.1.0)
+- [**InstaPower-1.1.1-portable-x64.exe**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.1/InstaPower-1.1.1-portable-x64.exe)
+- [**InstaPower-1.1.1-Setup-x64.exe**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.1/InstaPower-1.1.1-Setup-x64.exe)
+- [**SHA256SUMS.txt**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.1/SHA256SUMS.txt)
+- [**Release notes**](https://github.com/ThePowerUsers/InstaPower/releases/tag/v1.1.1)
 
-For a local integrity check on Windows, use `certutil -hashfile InstaPower-Setup-1.1.0-x64.exe SHA256` or the equivalent command for the portable executable and compare the result with `SHA256SUMS.txt`.
 
 ## Getting Started
 
@@ -210,7 +221,7 @@ The current roadmap is now implemented through the desktop-integration batch, wi
 - [x] 📥 Download handling
 - [x] 🧪 Automated smoke testing
 - [x] 🛡️ Deeper Electron security hardening
-- [x] 🏆 Professional release infrastructure, checksums, SBOM, and build provenance
+- [x] 🏆 Professional release infrastructure, checksums, and build provenance
 - [ ] 🔐 Production Windows code signing — enable after a real signing certificate/Trusted Signing credentials are configured in GitHub Actions
 - [ ] 🚀 Polished v2 desktop experience
 
