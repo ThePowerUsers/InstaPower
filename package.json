@@ -1,7 +1,7 @@
 {
   "name": "instapower",
   "productName": "InstaPower",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A fast, focused Instagram desktop experience for Windows, built with Electron.",
   "main": ".webpack/main",
   "private": true,
@@ -14,10 +14,16 @@
     "lint": "echo \"No linting configured\"",
     "build:windows": "npx --yes electron-builder@26.15.3 --win nsis portable"
   },
-  "keywords": ["instagram", "desktop", "electron", "windows", "social", "client"],
+  "keywords": [
+    "instagram",
+    "desktop",
+    "electron",
+    "windows",
+    "social",
+    "client"
+  ],
   "author": {
-    "name": "ThePowerUsers",
-    "email": "ifuizu1@gmail.com"
+    "name": "ThePowerUsers"
   },
   "license": "MIT",
   "devDependencies": {
