@@ -81,12 +81,12 @@ Includes a setup wizard with an installation-location choice and Start Menu/Desk
 
 **Portable** — run the standalone executable directly without installing the application.
 
-### v1.0.0
+### v1.1.0
 
-- [InstaPower Setup 1.0.0 x64](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/InstaPower-Setup-1.1.0-x64.exe)
-- [InstaPower Portable 1.0.0 x64](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/InstaPower-1.1.0-portable-x64.exe)
+- [InstaPower Setup 1.1.0 x64](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/InstaPower-Setup-1.1.0-x64.exe)
+- [InstaPower Portable 1.1.0 x64](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/InstaPower-1.1.0-portable-x64.exe)
 - [SHA256SUMS.txt](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.0/SHA256SUMS.txt)
-- [Release notes](https://github.com/ThePowerUsers/InstaPower/releases/tag/v1.0.0)
+- [Release notes](https://github.com/ThePowerUsers/InstaPower/releases/tag/v1.1.0)
 
 For a local integrity check on Windows, use `certutil -hashfile InstaPower-Setup-1.1.0-x64.exe SHA256` or the equivalent command for the portable executable and compare the result with `SHA256SUMS.txt`.
 
