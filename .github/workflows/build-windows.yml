@@ -21,6 +21,8 @@ concurrency:
 jobs:
   build-windows:
     runs-on: windows-latest
+    env:
+      SIGNPATH_ENABLED: ${{ secrets.SIGNPATH_API_TOKEN != '' && secrets.SIGNPATH_ORGANIZATION_ID != '' && secrets.SIGNPATH_PROJECT_SLUG != '' && secrets.SIGNPATH_SIGNING_POLICY_SLUG != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -88,11 +90,10 @@ jobs:
 
       - name: Upload installer for SignPath
         id: upload-installer-signpath
-        if: ${{ secrets.SIGNPATH_API_TOKEN != '' && secrets.SIGNPATH_ORGANIZATION_ID != '' && secrets.SIGNPATH_PROJECT_SLUG != '' && secrets.SIGNPATH_SIGNING_POLICY_SLUG != '' }}
+        if: env.SIGNPATH_ENABLED == 'true'
         uses: actions/upload-artifact@v7
         with:
           path: dist/*Setup*.exe
-          archive: false
           if-no-files-found: error
 
       - name: Submit installer signing request to SignPath
@@ -158,8 +159,6 @@ jobs:
 
       - name: Verify Authenticode signing status
         shell: pwsh
-        env:
-          SIGNPATH_ENABLED: ${{ secrets.SIGNPATH_API_TOKEN != '' && secrets.SIGNPATH_ORGANIZATION_ID != '' && secrets.SIGNPATH_PROJECT_SLUG != '' && secrets.SIGNPATH_SIGNING_POLICY_SLUG != '' }}
         run: |
           $executables = Get-ChildItem -Path dist -Filter '*.exe' -File |
             Where-Object { $_.Name -match 'Setup|portable' }
