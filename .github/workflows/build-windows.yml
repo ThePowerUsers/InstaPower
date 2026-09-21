@@ -107,8 +107,6 @@ jobs:
           wait-for-completion: true
           output-artifact-directory: ${{ runner.temp }}\signpath-installer
           skip-decompress: true
-          parameters: |
-            version: "${{ github.ref_name }}"
 
       - name: Replace installer with SignPath-signed artifact
         if: ${{ steps.upload-installer-signpath.outcome == 'success' }}
