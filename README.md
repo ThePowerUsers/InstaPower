@@ -69,14 +69,6 @@ If you use InstaPower and find it useful, a genuine star helps other developers 
 
 ---
 
-## Product Preview
-
-![InstaPower desktop preview](docs/screenshots/instapower-preview.svg)
-
-![InstaPower settings preview](docs/screenshots/settings-preview.svg)
-
-The previews above illustrate the current desktop direction and settings experience.
-
 ## Branding
 
 ![InstaPower logo](docs/instapower-logo.svg)
