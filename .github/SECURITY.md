@@ -2,10 +2,10 @@
 
 The canonical security policy for InstaPower is maintained at the repository root in [SECURITY.md](../SECURITY.md).
 
-## Security Contact
+## Private Security Reporting
 
-**parstylus@gmail.com**
+Use GitHub's private vulnerability reporting flow:
 
-Please do not post suspected vulnerabilities in public GitHub issues, discussions, or pull requests. Use the private reporting guidance in the root policy.
+**[Report a vulnerability privately](https://github.com/ThePowerUsers/InstaPower/security/advisories/new)**
 
-For GitHub security features and private vulnerability reporting, see the repository's **Security** tab when available.
+Please do not post suspected vulnerabilities in public GitHub issues, discussions, or pull requests.
