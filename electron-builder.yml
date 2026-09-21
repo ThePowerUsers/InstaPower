@@ -1,6 +1,5 @@
 appId: com.thepowerusers.instapower
 productName: InstaPower
-publisherName: ThePowerUsers
 copyright: Copyright © 2026 ThePowerUsers
 
 # Electron Forge creates the fully bundled Windows app in out/*-win32-x64.
@@ -20,6 +19,8 @@ win:
   icon: build/icon.svg
   requestedExecutionLevel: asInvoker
   signAndEditExecutable: true
+  signtoolOptions:
+    publisherName: ThePowerUsers
   # Authenticode signing is automatic when WIN_CSC_LINK / WIN_CSC_KEY_PASSWORD
   # are available in CI. Keep unsigned local builds usable while credentials are absent.
   artifactName: ${productName}-${version}-${arch}.${ext}
