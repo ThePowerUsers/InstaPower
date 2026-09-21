@@ -39,7 +39,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          npm sbom --sbom-format cyclonedx | Set-Content -Path dist/SBOM.cdx.json -Encoding utf8
+          npm sbom --package-lock-only --sbom-format cyclonedx | Set-Content -Path dist/SBOM.cdx.json -Encoding utf8
 
       - name: Prepare production bundle
         run: npm run package
