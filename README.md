@@ -117,7 +117,7 @@ Security is treated as a first-class part of the project.
 - No private, reverse-engineered, or unauthorized Instagram APIs.
 - No intentional automation of Instagram account actions.
 
-For vulnerability reporting, see **[SECURITY.md](SECURITY.md)**.
+For vulnerability reporting, see **[SECURITY.md](SECURITY.md)**. For privacy information, see **[PRIVACY.md](PRIVACY.md)**.
 
 ## Code signing policy
 
