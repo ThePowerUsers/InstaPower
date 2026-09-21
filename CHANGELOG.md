@@ -4,6 +4,8 @@
 
 ### Reliability and release infrastructure
 
+- Release pipeline validated on Windows before publishing v1.1.2.
+
 - Fixed the Windows GitHub Actions workflow so the production build completes successfully.
 - Restored a stable unsigned release path while SignPath Foundation application review is pending.
 - Kept Windows installer, portable build, SHA-256 checksums, and build provenance in the release pipeline.
