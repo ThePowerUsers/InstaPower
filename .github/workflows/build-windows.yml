@@ -10,6 +10,9 @@ permissions:
   id-token: write
   attestations: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: windows-release-${{ github.ref }}
   cancel-in-progress: false
@@ -34,12 +37,6 @@ jobs:
 
       - name: Run automated tests
         run: npm test
-
-      - name: Generate dependency SBOM
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Force -Path dist | Out-Null
-          npm sbom --package-lock-only --sbom-format cyclonedx | Set-Content -Path dist/SBOM.cdx.json -Encoding utf8
 
       - name: Prepare production bundle
         run: npm run package
@@ -90,6 +87,32 @@ jobs:
           Write-Host "Portable:"
           $portable | Select-Object Name, Length | Format-Table -AutoSize
 
+      - name: Verify Authenticode signing status
+        shell: pwsh
+        run: |
+          $executables = Get-ChildItem -Path dist -Filter '*.exe' -File |
+            Where-Object { $_.Name -match 'Setup|portable' }
+
+          foreach ($exe in $executables) {
+            $signature = Get-AuthenticodeSignature -FilePath $exe.FullName
+            Write-Host "$($exe.Name): $($signature.Status) / $($signature.SignerCertificate.Subject)"
+
+            if ($env:WIN_CSC_LINK) {
+              if ($signature.Status -ne 'Valid') {
+                Write-Error "Expected a valid Authenticode signature for $($exe.Name), but got $($signature.Status)."
+                exit 1
+              }
+              if ($signature.SignerCertificate.Subject -notmatch 'ThePowerUsers') {
+                Write-Error "Signed publisher for $($exe.Name) does not identify ThePowerUsers."
+                exit 1
+              }
+            } else {
+              Write-Warning "No WIN_CSC_LINK secret is configured; this build is unsigned and Windows may show Unknown Publisher."
+            }
+          }
+        env:
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+
       - name: Generate SHA256 checksums
         shell: pwsh
         run: |
@@ -121,31 +144,24 @@ jobs:
           subject-path: 'dist/*portable*.exe'
 
       - name: Upload installer artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: InstaPower-Windows-Installer
           path: dist/*Setup*.exe
           if-no-files-found: error
 
       - name: Upload portable artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: InstaPower-Windows-Portable
           path: dist/*portable*.exe
           if-no-files-found: error
 
       - name: Upload checksum artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: InstaPower-Windows-SHA256
           path: dist/SHA256SUMS.txt
-          if-no-files-found: error
-
-      - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: InstaPower-Windows-SBOM
-          path: dist/SBOM.cdx.json
           if-no-files-found: error
 
       - name: Publish release
@@ -166,10 +182,9 @@ jobs:
           InstaPower $tag — Windows release.
 
           Assets:
-          - Installer: setup wizard with selectable install directory.
-          - Portable: standalone executable with no installation.
+          - `InstaPower-$($tag.TrimStart('v'))-Setup-x64.exe`: Windows setup wizard.
+          - `InstaPower-$($tag.TrimStart('v'))-portable-x64.exe`: no-install portable build.
           - SHA256SUMS.txt: SHA-256 checksums for both Windows executables.
-          - SBOM.cdx.json: CycloneDX dependency inventory for the build.
 
           Build provenance attestations are generated for the Windows executables.
 
@@ -178,7 +193,7 @@ jobs:
 
           gh release view $tag 2>$null
           if ($LASTEXITCODE -eq 0) {
-            gh release upload $tag dist/*.exe dist/SHA256SUMS.txt dist/SBOM.cdx.json --clobber
+            gh release upload $tag dist/*.exe dist/SHA256SUMS.txt --clobber
           } else {
-            gh release create $tag dist/*.exe dist/SHA256SUMS.txt dist/SBOM.cdx.json --title $title --latest --notes $notes
+            gh release create $tag dist/*.exe dist/SHA256SUMS.txt --title $title --latest --notes $notes
           }
