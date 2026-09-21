@@ -10,17 +10,11 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
+    "test": "node --test",
     "lint": "echo \"No linting configured\"",
     "build:windows": "npx --yes electron-builder@26.15.3 --win nsis portable"
   },
-  "keywords": [
-    "instagram",
-    "desktop",
-    "electron",
-    "windows",
-    "social",
-    "client"
-  ],
+  "keywords": ["instagram", "desktop", "electron", "windows", "social", "client"],
   "author": {
     "name": "ThePowerUsers",
     "email": "ifuizu1@gmail.com"
