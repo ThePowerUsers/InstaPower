@@ -77,7 +77,7 @@ If you use InstaPower and find it useful, a genuine star helps other developers 
 
 ### Windows 10 / 11
 
-**Current release:** v1.1.1 — polished branding, Windows packaging, performance, and security updates  
+**Current release:** v1.1.2 — Windows build reliability and release infrastructure updates  
 **Latest stable release:** [GitHub Releases](https://github.com/ThePowerUsers/InstaPower/releases/latest)
 
 **Installer** — recommended for a normal Windows installation.  
@@ -85,12 +85,12 @@ Includes a setup wizard with an installation-location choice and Start Menu/Desk
 
 **Portable** — run the standalone executable directly without installing the application.
 
-### v1.1.1
+### v1.1.2
 
-- [**InstaPower-1.1.1-portable-x64.exe**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.1/InstaPower-1.1.1-portable-x64.exe)
-- [**InstaPower-1.1.1-Setup-x64.exe**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.1/InstaPower-1.1.1-Setup-x64.exe)
-- [**SHA256SUMS.txt**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.1/SHA256SUMS.txt)
-- [**Release notes**](https://github.com/ThePowerUsers/InstaPower/releases/tag/v1.1.1)
+- [**InstaPower-1.1.2-portable-x64.exe**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.2/InstaPower-1.1.2-portable-x64.exe)
+- [**InstaPower-1.1.2-Setup-x64.exe**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.2/InstaPower-1.1.2-Setup-x64.exe)
+- [**SHA256SUMS.txt**](https://github.com/ThePowerUsers/InstaPower/releases/download/v1.1.2/SHA256SUMS.txt)
+- [**Release notes**](https://github.com/ThePowerUsers/InstaPower/releases/tag/v1.1.2)
 
 
 ## Getting Started
