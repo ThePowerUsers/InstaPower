@@ -7,7 +7,6 @@
 - Release pipeline validated on Windows before publishing v1.1.2.
 
 - Fixed the Windows GitHub Actions workflow so the production build completes successfully.
-- Restored a stable unsigned release path while SignPath Foundation application review is pending.
 - Kept Windows installer, portable build, SHA-256 checksums, and build provenance in the release pipeline.
 
 
@@ -31,7 +30,7 @@
 ### Release infrastructure
 
 - Added GitHub artifact provenance attestations for Windows executables.
-- Added Windows publisher metadata and optional Authenticode signing through GitHub Actions secrets; no credentials are stored in the repository.
+- Added Windows publisher metadata and optional Authenticode signing support; no credentials are stored in the repository.
 - Added branded application icons and professional Windows artifact names.
 - Reduced bundled Electron locales and optimized the portable target for faster extraction.
 - Added product preview and settings visuals to the project documentation.
