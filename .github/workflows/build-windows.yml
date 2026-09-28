@@ -160,7 +160,6 @@ jobs:
           - SHA256SUMS.txt: SHA-256 checksums for both Windows executables.
 
           Build provenance attestations are generated for the Windows executables.
-          Code signing is provided through SignPath Foundation when enabled for the project.
 
           InstaPower is an independent, unofficial Instagram desktop client and is not affiliated with or endorsed by Instagram or Meta.
           "@
